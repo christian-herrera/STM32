@@ -45,6 +45,7 @@ UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
 struct VarBuffRing buff_rx;
+uint8_t buff_tx[35] = " ";
 uint8_t val_temp;
 volatile int8_t stringOk = -1;
 /* USER CODE END PV */
@@ -104,13 +105,22 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1){
   	//Parpadeo del Led
-	  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_1);
+	  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
 	  HAL_Delay(100);
 
 	  //Si recibo como minimo 1 byte, entro al bucle
 	  if(stringOk == 1){
-		  HAL_UART_Transmit_IT(&huart1, (uint8_t*)buff_rx.buffer, strlen((char*)buff_rx.buffer));
-		  stringOk = -1;
+			uint8_t i = 0;
+			while(BufferRing_available(&buff_rx) > 0) {
+				buff_tx[i] = BufferRing_read(&buff_rx);
+				i++;
+			}
+			buff_tx[i] = '\0';
+			HAL_UART_Transmit_IT(&huart1, (uint8_t*)buff_tx, strlen((char*)buff_tx));
+
+
+
+			stringOk = -1;
 	  }
 
 
@@ -212,22 +222,12 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LED_BUILTIN_GPIO_Port, LED_BUILTIN_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
-
   /*Configure GPIO pin : LED_BUILTIN_Pin */
   GPIO_InitStruct.Pin = LED_BUILTIN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LED_BUILTIN_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : LED_Pin */
-  GPIO_InitStruct.Pin = LED_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LED_GPIO_Port, &GPIO_InitStruct);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */

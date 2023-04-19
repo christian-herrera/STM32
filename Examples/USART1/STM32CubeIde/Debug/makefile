@@ -61,8 +61,8 @@ all: main-build
 main-build: SerialReceiver.elf secondary-outputs
 
 # Tool invocations
-SerialReceiver.elf SerialReceiver.map: $(OBJS) $(USER_OBJS) C:\Users\christian\Desktop\STM32\STM32\Examples\USART1\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "SerialReceiver.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\christian\Desktop\STM32\STM32\Examples\USART1\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SerialReceiver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+SerialReceiver.elf SerialReceiver.map: $(OBJS) $(USER_OBJS) E:\Documentos\(08)\ GitHub\STM32\Examples\USART1\STM32CubeIde\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "SerialReceiver.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"E:\Documentos\(08) GitHub\STM32\Examples\USART1\STM32CubeIde\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SerialReceiver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
