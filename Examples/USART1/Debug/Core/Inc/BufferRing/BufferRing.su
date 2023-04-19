@@ -1,6 +1,0 @@
-../Core/Inc/BufferRing/BufferRing.c:11:6:BufferRing_init	0	static
-../Core/Inc/BufferRing/BufferRing.c:22:6:BufferRing_add	0	static
-../Core/Inc/BufferRing/BufferRing.c:35:9:BufferRing_read	0	static
-../Core/Inc/BufferRing/BufferRing.c:45:9:BufferRing_available	0	static
-../Core/Inc/BufferRing/BufferRing.c:51:6:BufferRing_incrementTail	0	static
-../Core/Inc/BufferRing/BufferRing.c:61:6:BufferRing_incrementIndex	0	static

@@ -1,6 +1,0 @@
-BufferRing.c:11:6:BufferRing_init	1
-BufferRing.c:22:6:BufferRing_add	5
-BufferRing.c:35:9:BufferRing_read	3
-BufferRing.c:45:9:BufferRing_available	1
-BufferRing.c:51:6:BufferRing_incrementTail	2
-BufferRing.c:61:6:BufferRing_incrementIndex	2
